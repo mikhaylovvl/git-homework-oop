@@ -35,6 +35,9 @@ class Student:
         else:
             return sum_grade / count_grade
 
+    def __lt__(self, other):
+        return self.count_avg() < other.count_avg()
+
     def __str__(self):
         res = f'Имя: {self.name} \nФамилия: {self.surname} \nСредняя оценка за домашние задания: {self.count_avg()}' \
               f' \nКурсы в процессе изучения: {", ".join(self.courses_in_progress)} \nЗавершенные курсы: {", ".join(self.finished_courses)}'
@@ -64,6 +67,9 @@ class Lecturer(Mentor):
             return
         else:
             return sum_rate / count_rate
+
+    def __lt__(self, other):
+        return self.count_avg() < other.count_avg()
 
     def __str__(self):
         res = f'Имя: {self.name} \nФамилия: {self.surname} \nСредняя оценка за лекции: {self.count_avg()}'
@@ -167,6 +173,7 @@ def count_avg_grade_students_course(list_students, course):
                 len_grade += len(value)
     return sum_grade / len_grade
 
+
 def count_avg_grade_lectures(list_lectures, course):
     sum_grade = 0
     len_grade = 0
@@ -188,5 +195,8 @@ course_l = 'Web-Designe'
 
 print(count_avg_grade_lectures(list_lectures, course_l))
 
+print(ben_lecturer.__lt__(alex_lecturer))
+print(alex_lecturer.__lt__(ben_lecturer))
 
-
+print(milana_student.__lt__(jon_student))
+print(jon_student.__lt__(milana_student))
